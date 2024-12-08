@@ -1,0 +1,39 @@
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+.dark-mode .btn-primary {
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+}
+
+.badge-General {
+  background-color: rgb(91, 91, 91) !important;
+  color: white !important;
+}
+
+.badge-Fitness {
+  background-color: #722B92 !important;
+  color: white !important;
+}
+
+.badge-Work {
+  background-color: rgb(104, 12, 12) !important;
+  color: white !important;
+}
+
+.badge-Personal {
+  background-color: rgb(40, 40, 139) !important;
+  color: white !important;
+}
