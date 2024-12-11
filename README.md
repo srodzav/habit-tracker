@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Habit Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web application that helps users build and maintain positive habits through a simple and intuitive interface. Users can add habits, set deadlines, track their progress with streaks, and receive motivational emojis when reaching milestones.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Add Habits**: Users can add new habits with a name, description, category, start date, and a 24-hour deadline.
+- **Track Streaks**: Habits include a streak counter, which rewards users with emojis for maintaining progress:
+  - 🔥 for 3+ days.
+  - 🎉 for 5+ days.
+  - 🏆 for 10+ days.
+- **Deadline Alerts**: Visual feedback based on time remaining:
+  - **Red**: Less than 1 hour left.
+  - **Yellow**: Less than 4 hours left.
+  - **Gray**: Deadline missed.
+- **Category Badges**: Habits are labeled with categories (e.g., Fitness, Work, Personal) for better organization.
+- **Renew or Delete**: Users can reset a habit’s deadline or remove it entirely.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**React.js**
+  - Handles component-based architecture and state management.
+  - Built-in hooks (```useState```, ```useEffect```) for dynamic behavior.
 
-### `npm test`
+**React-Bootstrap**
+  - Styled components such as cards, buttons, forms, and grids for responsive design.
+  - Enables quick and consistent UI development.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Bootstrap Icons**
+  - Provides intuitive icons for actions like "Check," "Renew," and "Delete."
 
-### `npm run build`
+# Deployment Instructions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Development Environment**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  Tested locally with Node.js and React development tools.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
+   ```
+    git clone https://github.com/sebastianrdz/habit-tracker.git
+    cd habit-tracker
+   ```
 
-### `npm run eject`
+2. Install dependencies:
+  ```
+  npm install
+  ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Start the development server:
+```
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Build for production:
+```
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  1. Visit **habittracker.sebastianrdz.com**.
+  2. Add a habit by filling out the form with:
+  - **Name**: Enter the habit name (e.g., "Read")
+  - **Description**: Provide a brief description (e.g., "Read 10 pages daily").
+- **Category**: Choose a category such as Fitness, Work, or Personal.
+- **Start Date**: Select the start date and time for the habit.
+  3. Track your progress:
+  - Check off completed habits daily.
+  - View streak progress with motivational emojis.
+  - Renew habits or delete them as needed.
 
-## Learn More
+## Notes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  - All habits and progress are saved in the browser’s local storage.
+- Dark mode is enabled by default for an immersive user experience.
+- Use the app to build lasting positive habits and reach your goals!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Author
 
-### Code Splitting
+**Sebastián Rodríguez**
+- [LinkedIn](https://www.linkedin.com/in/sebastian-rodriguez-zavala/)
+- [Web](https://sebastianrdz.com)
+- [Email](mailto:contact@sebastianrdz.com)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is for personal use and is not licensed for commercial distribution.
