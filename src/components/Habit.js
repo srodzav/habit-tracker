@@ -4,23 +4,38 @@ import '../assets/styles/Habit.css';
 
 function Habit({ title, text, date, category, streak, deadline, completed, onCheck, onRenew, onDelete }) {
   const [status, setStatus] = useState('secondary'); 
+  const [timeRemaining, setTimeRemaining] = useState('');
 
   useEffect(() => {
-    const now = new Date();
-    const deadlineTime = new Date(deadline);
+    const calculateTimeRemaining = () => {
+      const now = new Date();
+      const deadlineTime = new Date(deadline);
+      const diff = deadlineTime - now;
 
-    if (completed) {
-      setStatus('success');
-    } else if (deadlineTime - now <= 3600000) {
-      // Less than 1 hour
-      setStatus('danger');
-    } else if (deadlineTime - now <= 14400000) {
-      // Less than 4 hours
-      setStatus('warning');
-    } else if (deadlineTime > now) {
-      // Within the allowed time
-      setStatus('secondary');
-    }
+      if (diff <= 0) {
+        setTimeRemaining('Expired');
+        setStatus('secondary');
+      } else {
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        setTimeRemaining(`${hours}h ${minutes}m remaining`);
+
+        if (completed) {
+          setStatus('success');
+        } else if (diff <= 3600000) {
+          setStatus('danger');
+        } else if (diff <= 14400000) {
+          setStatus('warning');
+        } else {
+          setStatus('secondary');
+        }
+      }
+    };
+    calculateTimeRemaining();
+
+    const interval = setInterval(calculateTimeRemaining, 1000);
+
+    return () => clearInterval(interval);
   }, [deadline, completed]);
 
   return (
