@@ -7,36 +7,34 @@ function Habit({ title, text, date, category, streak, deadline, completed, onChe
   const [timeRemaining, setTimeRemaining] = useState('');
 
   useEffect(() => {
-    const calculateTimeRemaining = () => {
+    const updateHabitStatus = () => {
       const now = new Date();
       const deadlineTime = new Date(deadline);
       const diff = deadlineTime - now;
+  
+      console.log("Debug: Tiempo restante (ms):", diff);
+  
+      if (completed) {
+        setStatus("success"); // ✅ Si está completado, SIEMPRE VERDE
+        return;
+      }
 
       if (diff <= 0) {
-        setTimeRemaining('Expired');
-        setStatus('secondary');
+        setStatus('secondary'); // Expirado (gris)
+      } else if (diff <= 3600000) { // Menos de 1 hora
+        setStatus('danger');
+      } else if (diff <= 10800000) { // Menos de 3 horas
+        setStatus('warning');
       } else {
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        setTimeRemaining(`${hours}h ${minutes}m remaining`);
-
-        if (completed) {
-          setStatus('success');
-        } else if (diff <= 3600000) {
-          setStatus('danger');
-        } else if (diff <= 14400000) {
-          setStatus('warning');
-        } else {
-          setStatus('secondary');
-        }
+        setStatus(completed ? 'success' : 'success'); // Verde si está completado
       }
     };
-    calculateTimeRemaining();
-
-    const interval = setInterval(calculateTimeRemaining, 1000);
-
-    return () => clearInterval(interval);
-  }, [deadline, completed]);
+  
+    updateHabitStatus();
+    const interval = setInterval(updateHabitStatus, 1000); // Se actualiza cada segundo
+  
+    return () => clearInterval(interval); // Limpia el intervalo al desmontar
+  }, [deadline, completed]); // Se ejecuta cada vez que `deadline` o `completed` cambian  
 
   return (
     <Card bg={status} text="white" style={{ width: '100%' }}>
@@ -62,15 +60,11 @@ function Habit({ title, text, date, category, streak, deadline, completed, onChe
           {streak >= 10 ? '🏆' : streak >= 5 ? '🎉' : streak >= 3 ? '🔥' : ''}
         </Card.Text>
 
-        {/* <Card.Text>
-          <strong>Start Date:</strong> {new Date(date).toLocaleString()}
-        </Card.Text> */}
+        <Card.Text>
+          <strong>Time Remaining:</strong> {timeRemaining}
+        </Card.Text>
 
-        {/* <Card.Text>
-          <strong>Deadline:</strong> {new Date(deadline).toLocaleString()}
-        </Card.Text> */}
-
-        {!completed && (
+        {status !== 'secondary' && (
           <Button variant="light" onClick={onCheck} className="me-2">
             Check <i className="bi bi-check-circle"></i>
           </Button>

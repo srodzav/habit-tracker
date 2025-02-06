@@ -49,6 +49,7 @@ function App() {
       { ...newHabit, 
         streak: 0, 
         completed: false, 
+        lastChecked: null,
         deadline: formatToLocalDateTime(deadline) 
       },
     ]);
@@ -63,16 +64,31 @@ function App() {
 
   const handleCheckHabit = (index) => {
     const updatedHabits = [...habits];
-    updatedHabits[index].completed = true;
+    const now = new Date();
+    
+    const lastCheckedDate = updatedHabits[index].lastChecked
+      ? new Date(updatedHabits[index].lastChecked).toDateString()
+      : null;
+    const currentDate = now.toDateString();
+  
+    if (lastCheckedDate !== currentDate) {
+      updatedHabits[index].completed = true;
+      updatedHabits[index].streak += 1; // Incrementa la racha
+      updatedHabits[index].lastChecked = now.toISOString(); // Registra el nuevo Check
+    }
+  
     setHabits(updatedHabits);
   };
 
   const handleRenewHabit = (index) => {
     const updatedHabits = [...habits];
-    const newDeadline = new Date();
-    newDeadline.setHours(newDeadline.getHours() + 24); // Renew deadline to 24 hours
+    const now = new Date();
+    const newDeadline = new Date(now.getTime() + 24 * 60 * 60 * 1000); // 24 horas desde ahora
+  
     updatedHabits[index].deadline = newDeadline.toISOString();
-    updatedHabits[index].completed = true; // Reset completed status
+    updatedHabits[index].completed = false;
+    updatedHabits[index].lastChecked = null; // Permite hacer Check nuevamente al día siguiente
+  
     setHabits(updatedHabits);
   };
 
